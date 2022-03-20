@@ -1,10 +1,22 @@
 public class MyThread extends Thread{
 
-    public MyThread(){
-        super();
+    public MyThread(String name){
+        super(name);
     }
 
     public void run(){
-        System.out.println("Hello there, from " + getName());
+        while(true){
+            System.out.println("Hello there, from " + this.getName());
+            if(isInterrupted())
+                break;
+            Thread.yield();
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+        
     }
 }
